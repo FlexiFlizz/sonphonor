@@ -1,0 +1,301 @@
+// This is your Prisma schema file
+// Learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Modèle Utilisateur
+model User {
+  id              String   @id @default(uuid())
+  firstName       String
+  lastName        String
+  email           String   @unique
+  password        String
+  phone           String?
+  role            Role     @default(MEMBER)
+  status          UserStatus @default(ACTIVE)
+  joinDate        DateTime @default(now())
+  lastLogin       DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  quotesCreated   Quote[]  @relation("QuoteCreator")
+  eventsCreated   Event[]  @relation("EventCreator")
+  damageReports   DamageReport[]
+  technicianEvents TechnicianAssignment[]
+  
+  @@index([email])
+}
+
+// Modèle Catégorie
+model Category {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  color       String   @default("#64748b")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  equipment   Equipment[]
+}
+
+// Modèle Équipement
+model Equipment {
+  id               String   @id @default(uuid())
+  name             String
+  categoryId       String
+  brand            String
+  model            String
+  quantity         Int
+  availableQuantity Int
+  dailyRateHT      Float
+  description      String?
+  serialNumbers    String[]
+  condition        Condition @default(GOOD)
+  purchaseDate     DateTime?
+  purchasePrice    Float?
+  imageUrl         String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relations
+  category         Category @relation(fields: [categoryId], references: [id])
+  damageReports    DamageReport[]
+  quoteItems       QuoteItem[]
+  eventEquipment   EventEquipment[]
+  flightCaseItems  FlightCaseItem[]
+  
+  @@index([categoryId])
+}
+
+// Modèle Rapport de dommages
+model DamageReport {
+  id              String   @id @default(uuid())
+  equipmentId     String
+  reportedById    String
+  reportedAt      DateTime @default(now())
+  description     String
+  incidentDate    DateTime
+  incidentLocation String
+  status          DamageStatus @default(REPORTED)
+  repairCost      Float?
+  repairNotes     String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  equipment       Equipment @relation(fields: [equipmentId], references: [id])
+  reportedBy      User @relation(fields: [reportedById], references: [id])
+  
+  @@index([equipmentId])
+  @@index([reportedById])
+}
+
+// Modèle Devis
+model Quote {
+  id          String   @id @default(uuid())
+  quoteNumber String   @unique @default(cuid())
+  clientName  String
+  clientEmail String
+  clientPhone String
+  eventName   String
+  eventDate   DateTime
+  validUntil  DateTime
+  status      QuoteStatus @default(DRAFT)
+  totalAmount Float
+  taxAmount   Float
+  notes       String?
+  createdById String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  items       QuoteItem[]
+  createdBy   User @relation("QuoteCreator", fields: [createdById], references: [id])
+  event       Event?
+  
+  @@index([createdById])
+  @@index([status])
+}
+
+// Modèle Article de devis
+model QuoteItem {
+  id          String   @id @default(uuid())
+  quoteId     String
+  equipmentId String
+  quantity    Int
+  days        Int
+  unitPrice   Float
+  totalPrice  Float
+  createdAt   DateTime @default(now())
+
+  // Relations
+  quote       Quote @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+  equipment   Equipment @relation(fields: [equipmentId], references: [id])
+  
+  @@index([quoteId])
+  @@index([equipmentId])
+}
+
+// Modèle Événement
+model Event {
+  id              String   @id @default(uuid())
+  name            String
+  description     String
+  startDate       DateTime
+  endDate         DateTime
+  location        String
+  clientName      String
+  clientEmail     String
+  clientPhone     String
+  status          EventStatus @default(PLANNED)
+  quoteId         String?  @unique
+  totalValue      Float    @default(0)
+  notes           String?
+  createdById     String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  quote           Quote? @relation(fields: [quoteId], references: [id])
+  createdBy       User @relation("EventCreator", fields: [createdById], references: [id])
+  equipmentAssigned EventEquipment[]
+  flightCasesAssigned EventFlightCase[]
+  techniciansAssigned TechnicianAssignment[]
+  
+  @@index([createdById])
+  @@index([status])
+  @@index([startDate])
+}
+
+// Modèle Équipement assigné à un événement
+model EventEquipment {
+  id          String   @id @default(uuid())
+  eventId     String
+  equipmentId String
+  quantity    Int
+  assignedBy  String
+  assignedAt  DateTime @default(now())
+  returnedAt  DateTime?
+  notes       String?
+
+  // Relations
+  event       Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  equipment   Equipment @relation(fields: [equipmentId], references: [id])
+  
+  @@unique([eventId, equipmentId])
+  @@index([eventId])
+  @@index([equipmentId])
+}
+
+// Modèle FlightCase
+model FlightCase {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  color       String   @default("#64748b")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  items       FlightCaseItem[]
+  events      EventFlightCase[]
+}
+
+// Modèle Article dans un FlightCase
+model FlightCaseItem {
+  id          String   @id @default(uuid())
+  flightCaseId String
+  equipmentId String
+  quantity    Int
+
+  // Relations
+  flightCase  FlightCase @relation(fields: [flightCaseId], references: [id], onDelete: Cascade)
+  equipment   Equipment @relation(fields: [equipmentId], references: [id])
+  
+  @@unique([flightCaseId, equipmentId])
+  @@index([flightCaseId])
+  @@index([equipmentId])
+}
+
+// Modèle FlightCase assigné à un événement
+model EventFlightCase {
+  id          String   @id @default(uuid())
+  eventId     String
+  flightCaseId String
+  assignedAt  DateTime @default(now())
+  returnedAt  DateTime?
+
+  // Relations
+  event       Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  flightCase  FlightCase @relation(fields: [flightCaseId], references: [id])
+  
+  @@unique([eventId, flightCaseId])
+  @@index([eventId])
+  @@index([flightCaseId])
+}
+
+// Modèle Technicien assigné à un événement
+model TechnicianAssignment {
+  id          String   @id @default(uuid())
+  eventId     String
+  userId      String
+  role        String   // "Ingénieur son", "Assistant", etc.
+  assignedAt  DateTime @default(now())
+
+  // Relations
+  event       Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user        User @relation(fields: [userId], references: [id])
+  
+  @@unique([eventId, userId])
+  @@index([eventId])
+  @@index([userId])
+}
+
+// Énumérations
+enum Role {
+  ADMIN
+  MEMBER
+  VOLUNTEER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum Condition {
+  EXCELLENT
+  GOOD
+  FAIR
+  POOR
+}
+
+enum DamageStatus {
+  REPORTED
+  IN_REPAIR
+  REPAIRED
+  RETIRED
+}
+
+enum QuoteStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  REJECTED
+}
+
+enum EventStatus {
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
