@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonphonor - Aperçu du Système</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .card { transition: transform 0.2s; }
+        .card:hover { transform: translateY(-4px); }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-8">
+            <h1 class="text-4xl font-bold mb-2">🎵 Sonphonor</h1>
+            <p class="text-blue-100 text-lg">Système de Gestion de Matériel de Sonorisation</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-8">
+        <!-- Statistiques rapides -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow p-6 card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">Équipements</p>
+                        <p class="text-3xl font-bold text-blue-600">145</p>
+                    </div>
+                    <div class="bg-blue-100 rounded-full p-3">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6 card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">Événements</p>
+                        <p class="text-3xl font-bold text-green-600">23</p>
+                    </div>
+                    <div class="bg-green-100 rounded-full p-3">
+                        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6 card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">Devis actifs</p>
+                        <p class="text-3xl font-bold text-yellow-600">12</p>
+                    </div>
+                    <div class="bg-yellow-100 rounded-full p-3">
+                        <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-6 card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">Utilisateurs</p>
+                        <p class="text-3xl font-bold text-purple-600">8</p>
+                    </div>
+                    <div class="bg-purple-100 rounded-full p-3">
+                        <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fonctionnalités principales -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Fonctionnalités Principales</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Gestion du matériel -->
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <div class="flex items-center mb-4">
+                    <div class="bg-blue-500 rounded-lg p-3 mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Gestion du Matériel</h3>
+                </div>
+                <ul class="space-y-2 text-gray-600">
+                    <li>✓ Inventaire complet avec stock en temps réel</li>
+                    <li>✓ Catégorisation par type d'équipement</li>
+                    <li>✓ Suivi de l'état (Excellent → Poor)</li>
+                    <li>✓ Historique d'achat et prix</li>
+                    <li>✓ Photos et numéros de série</li>
+                </ul>
+            </div>
+
+            <!-- Gestion des événements -->
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <div class="flex items-center mb-4">
+                    <div class="bg-green-500 rounded-lg p-3 mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Gestion des Événements</h3>
+                </div>
+                <ul class="space-y-2 text-gray-600">
+                    <li>✓ Planification avec dates et lieux</li>
+                    <li>✓ Statuts : Planifié → En cours → Complété</li>
+                    <li>✓ Assignation du matériel</li>
+                    <li>✓ Assignation des techniciens</li>
+                    <li>✓ Lien avec les devis clients</li>
+                </ul>
+            </div>
+
+            <!-- Devis et facturation -->
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <div class="flex items-center mb-4">
+                    <div class="bg-yellow-500 rounded-lg p-3 mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Devis & Facturation</h3>
+                </div>
+                <ul class="space-y-2 text-gray-600">
+                    <li>✓ Génération automatique de devis</li>
+                    <li>✓ Calcul du prix par jour de location</li>
+                    <li>✓ Gestion des taxes</li>
+                    <li>✓ Suivi : Brouillon → Envoyé → Accepté</li>
+                    <li>✓ Conversion devis → événement</li>
+                </ul>
+            </div>
+
+            <!-- Flight Cases -->
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <div class="flex items-center mb-4">
+                    <div class="bg-indigo-500 rounded-lg p-3 mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Flight Cases</h3>
+                </div>
+                <ul class="space-y-2 text-gray-600">
+                    <li>✓ Organisation du matériel par conteneurs</li>
+                    <li>✓ Gestion des contenus</li>
+                    <li>✓ Codes couleur personnalisés</li>
+                    <li>✓ Assignation aux événements</li>
+                    <li>✓ Tracking départ/retour</li>
+                </ul>
+            </div>
+
+            <!-- Rapports de dommages -->
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <div class="flex items-center mb-4">
+                    <div class="bg-red-500 rounded-lg p-3 mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Rapports de Dommages</h3>
+                </div>
+                <ul class="space-y-2 text-gray-600">
+                    <li>✓ Déclaration d'incidents</li>
+                    <li>✓ Suivi des réparations</li>
+                    <li>✓ Estimation des coûts</li>
+                    <li>✓ Workflow : Signalé → Réparé → Retiré</li>
+                    <li>✓ Historique par équipement</li>
+                </ul>
+            </div>
+
+            <!-- Gestion des utilisateurs -->
+            <div class="bg-white rounded-lg shadow-md p-6 card">
+                <div class="flex items-center mb-4">
+                    <div class="bg-purple-500 rounded-lg p-3 mr-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Gestion des Utilisateurs</h3>
+                </div>
+                <ul class="space-y-2 text-gray-600">
+                    <li>✓ Rôles : Admin, Membre, Bénévole</li>
+                    <li>✓ Authentification JWT sécurisée</li>
+                    <li>✓ Gestion des permissions</li>
+                    <li>✓ Assignation aux événements</li>
+                    <li>✓ Historique de connexion</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Architecture technique -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Architecture Technique</h2>
+
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full mr-2">Frontend</span>
+                    </h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><strong>React 18</strong> avec TypeScript</li>
+                        <li><strong>Tailwind CSS</strong> + Radix UI</li>
+                        <li><strong>Zustand</strong> - State management</li>
+                        <li><strong>React Hook Form</strong> - Formulaires</li>
+                        <li><strong>Axios</strong> - Requêtes HTTP</li>
+                        <li><strong>Recharts</strong> - Graphiques</li>
+                        <li><strong>Framer Motion</strong> - Animations</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full mr-2">Backend</span>
+                    </h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li><strong>Node.js 20</strong> + Express.js</li>
+                        <li><strong>PostgreSQL 16</strong> - Base de données</li>
+                        <li><strong>Prisma ORM</strong> - Accès données</li>
+                        <li><strong>Redis 7</strong> - Cache & sessions</li>
+                        <li><strong>JWT</strong> - Authentification</li>
+                        <li><strong>Helmet + CORS</strong> - Sécurité</li>
+                        <li><strong>Docker Compose</strong> - Déploiement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schéma de données -->
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Schéma de Base de Données</h2>
+
+        <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg shadow-lg p-8 text-white mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="space-y-3">
+                    <div class="bg-gray-700 rounded p-4">
+                        <h4 class="font-bold text-blue-300 mb-2">👤 User</h4>
+                        <p class="text-sm text-gray-300">email, password, role, status</p>
+                    </div>
+                    <div class="bg-gray-700 rounded p-4">
+                        <h4 class="font-bold text-green-300 mb-2">📦 Equipment</h4>
+                        <p class="text-sm text-gray-300">name, quantity, price, condition</p>
+                    </div>
+                    <div class="bg-gray-700 rounded p-4">
+                        <h4 class="font-bold text-yellow-300 mb-2">🏷️ Category</h4>
+                        <p class="text-sm text-gray-300">name, description, color</p>
+                    </div>
+                    <div class="bg-gray-700 rounded p-4">
+                        <h4 class="font-bold text-purple-300 mb-2">🎪 Event</h4>
+                        <p class="text-sm text-gray-300">name, dates, location, status</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="bg-gray-700 rounded p-4">
+                        <h4 class="font-bold text-orange-300 mb-2">📄 Quote</h4>
+                        <p class="text-sm text-gray-300">number, client, amount, status</p>
+                    </div>
+                    <div class="bg-gray-700 rounded p-4">
+                        <h4 class="font-bold text-pink-300 mb-2">📋 QuoteItem</h4>
+                        <p class="text-sm text-gray-300">equipment, quantity, days, price</p>
+                    </div>
+                    <div class="bg-gray-700 rounded p-4">
+                        <h4 class="font-bold text-cyan-300 mb-2">🔗 EventEquipment</h4>
+                        <p class="text-sm text-gray-300">event ↔ equipment, quantity</p>
+                    </div>
+                    <div class="bg-gray-700 rounded p-4">
+                        <h4 class="font-bold text-red-300 mb-2">⚠️ DamageReport</h4>
+                        <p class="text-sm text-gray-300">equipment, incident, repair cost</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="bg-gray-700 rounded p-4">
+                        <h4 class="font-bold text-indigo-300 mb-2">💼 FlightCase</h4>
+                        <p class="text-sm text-gray-300">name, description, color</p>
+                    </div>
+                    <div class="bg-gray-700 rounded p-4">
+                        <h4 class="font-bold text-lime-300 mb-2">📦 FlightCaseItem</h4>
+                        <p class="text-sm text-gray-300">flightCase ↔ equipment</p>
+                    </div>
+                    <div class="bg-gray-700 rounded p-4">
+                        <h4 class="font-bold text-teal-300 mb-2">🔗 EventFlightCase</h4>
+                        <p class="text-sm text-gray-300">event ↔ flightCase</p>
+                    </div>
+                    <div class="bg-gray-700 rounded p-4">
+                        <h4 class="font-bold text-fuchsia-300 mb-2">👷 TechnicianAssignment</h4>
+                        <p class="text-sm text-gray-300">event ↔ user, role</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 text-center text-gray-400 text-sm">
+                <p>11 modèles • Relations complexes • Indexation optimisée</p>
+            </div>
+        </div>
+
+        <!-- État du développement -->
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-6 rounded-r-lg mb-8">
+            <h3 class="text-lg font-semibold text-yellow-800 mb-2">📌 État Actuel du Projet</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div>
+                    <p class="font-semibold text-yellow-900 mb-2">✅ Complété :</p>
+                    <ul class="space-y-1 text-yellow-800">
+                        <li>• Infrastructure Docker complète</li>
+                        <li>• Schéma de base de données Prisma</li>
+                        <li>• Configuration backend Express</li>
+                        <li>• Variables d'environnement</li>
+                        <li>• Scripts de déploiement</li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-semibold text-yellow-900 mb-2">⚙️ En développement :</p>
+                    <ul class="space-y-1 text-yellow-800">
+                        <li>• Routes API backend (auth, users, equipment, etc.)</li>
+                        <li>• Composants React frontend</li>
+                        <li>• Intégration frontend ↔ backend</li>
+                        <li>• Tests unitaires et d'intégration</li>
+                        <li>• Documentation API (Swagger)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prochaines étapes -->
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-6 rounded-r-lg">
+            <h3 class="text-lg font-semibold text-blue-800 mb-3">🚀 Prochaines Étapes Recommandées</h3>
+            <ol class="space-y-2 text-blue-800">
+                <li><strong>1.</strong> Implémenter les routes API backend (authentification, CRUD pour chaque modèle)</li>
+                <li><strong>2.</strong> Créer l'interface React avec les pages principales (Dashboard, Équipements, Événements, Devis)</li>
+                <li><strong>3.</strong> Développer les composants de formulaire avec validation</li>
+                <li><strong>4.</strong> Implémenter l'authentification JWT côté frontend</li>
+                <li><strong>5.</strong> Ajouter les tests (Jest pour le backend, React Testing Library pour le frontend)</li>
+                <li><strong>6.</strong> Configurer CI/CD et déploiement sur serveur OVH</li>
+            </ol>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-12 py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400">Sonphonor - Système de Gestion de Matériel de Sonorisation</p>
+            <p class="text-gray-500 text-sm mt-2">Architecture : React + TypeScript + Express + PostgreSQL + Docker</p>
+        </div>
+    </footer>
+</body>
+</html>
