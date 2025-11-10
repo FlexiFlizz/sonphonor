@@ -80,7 +80,7 @@ services:
       - "traefik.http.routers.sonphonor-api.rule=Host(`${API_DOMAIN:-api.sonphonor.local}`)"
       - "traefik.http.services.sonphonor-api.loadbalancer.server.port=4000"
 
-  # Frontend React
+  # Frontend React (inclut Nginx avec reverse proxy API)
   frontend:
     image: ${FRONTEND_IMAGE:-sonphonor-frontend:latest}
     build:
@@ -92,13 +92,15 @@ services:
     depends_on:
       backend:
         condition: service_healthy
+    ports:
+      - "${HTTP_PORT:-80}:80"
     environment:
       NGINX_HOST: ${FRONTEND_DOMAIN:-sonphonor.local}
       NGINX_PORT: 80
     networks:
       - sonphonor-network
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80"]
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -110,33 +112,8 @@ services:
       - "traefik.http.routers.sonphonor-web.rule=Host(`${FRONTEND_DOMAIN:-sonphonor.local}`)"
       - "traefik.http.services.sonphonor-web.loadbalancer.server.port=80"
 
-  # Nginx Reverse Proxy
-  nginx:
-    image: nginx:alpine
-    restart: unless-stopped
-    ports:
-      - "${HTTP_PORT:-80}:80"
-      - "${HTTPS_PORT:-443}:443"
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d:ro
-      - ./nginx/ssl:/etc/nginx/ssl:ro
-      - nginx_logs:/var/log/nginx
-    depends_on:
-      frontend:
-        condition: service_healthy
-      backend:
-        condition: service_healthy
-    networks:
-      - sonphonor-network
-    healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:80/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
-    labels:
-      - "com.portainer.stack=sonphonor"
-      - "com.portainer.service=proxy"
+  # Note: Pas besoin de Nginx séparé - Le frontend contient déjà Nginx
+  # avec reverse proxy vers le backend configuré (/api -> backend:4000)
 
   # Adminer pour gérer la base de données (optionnel - décommenter si besoin)
   # adminer:
@@ -161,8 +138,6 @@ volumes:
   redis_data:
     driver: local
   uploads:
-    driver: local
-  nginx_logs:
     driver: local
 
 networks:
