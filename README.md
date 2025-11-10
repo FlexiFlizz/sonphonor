@@ -1,16 +1,35 @@
 # 🎵 Sonphonor - Système de Gestion de Matériel de Sonorisation
 
-## 📦 Déploiement sur Serveur OVH avec Portainer
+Application web complète pour gérer votre inventaire de matériel de sonorisation, les réservations, et le suivi des équipements.
 
-### Prérequis
-- Serveur OVH avec Ubuntu/Debian
-- Portainer déjà installé
-- Docker et Docker Compose installés
-- Accès SSH au serveur
+## 🚀 Déploiement Rapide
+
+### 📦 Déploiement sur Portainer (Recommandé)
+
+**Portainer est la méthode la plus simple et rapide pour déployer Sonphonor !**
+
+➡️ **[Guide complet de déploiement Portainer](./PORTAINER_DEPLOYMENT.md)**
+
+**En résumé** :
+1. Connectez-vous à Portainer
+2. Créez une nouvelle Stack nommée "sonphonor"
+3. Utilisez le repository Git ou uploadez le docker-compose.yml
+4. Configurez les variables d'environnement (voir .env.example)
+5. Déployez !
 
 ---
 
-## 🚀 Installation Rapide
+## 📋 Prérequis Généraux
+
+- ✅ Serveur Linux (Ubuntu/Debian recommandé)
+- ✅ Docker Engine 20.10+ et Docker Compose v2
+- ✅ Portainer 2.0+ (pour déploiement GUI)
+- ✅ Au minimum 2GB RAM et 10GB d'espace disque
+- ✅ Accès SSH au serveur (optionnel si utilisation de Portainer)
+
+---
+
+## 🚀 Installation Rapide (CLI)
 
 ### 1. Connexion au serveur
 ```bash
