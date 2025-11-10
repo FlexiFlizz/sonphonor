@@ -44,7 +44,6 @@ services:
 
   # Backend API Node.js
   backend:
-    image: ${BACKEND_IMAGE:-sonphonor-backend:latest}
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -82,7 +81,6 @@ services:
 
   # Frontend React (inclut Nginx avec reverse proxy API)
   frontend:
-    image: ${FRONTEND_IMAGE:-sonphonor-frontend:latest}
     build:
       context: ./frontend
       dockerfile: Dockerfile
