@@ -27,7 +27,7 @@ services:
   redis:
     image: redis:7-alpine
     restart: unless-stopped
-    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-}
+    command: redis-server --appendonly yes
     volumes:
       - redis_data:/data
     networks:
@@ -37,7 +37,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-      start_period: 5s
+      start_period: 10s
     labels:
       - "com.portainer.stack=sonphonor"
       - "com.portainer.service=cache"
@@ -52,7 +52,7 @@ services:
     environment:
       NODE_ENV: ${NODE_ENV:-production}
       DATABASE_URL: postgresql://${POSTGRES_USER:-sonphonor_user}:${POSTGRES_PASSWORD:-ChangeMe123!}@postgres:5432/${POSTGRES_DB:-sonphonor}
-      REDIS_URL: redis://:${REDIS_PASSWORD:-}@redis:6379
+      REDIS_URL: redis://redis:6379
       JWT_SECRET: ${JWT_SECRET:-ChangeThisSecretKey123!}
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-7d}
       PORT: 4000
