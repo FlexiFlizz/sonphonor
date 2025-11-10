@@ -17,7 +17,8 @@ RUN apk add --no-cache libc6-compat
 COPY package*.json ./
 
 # Installation des dépendances
-RUN npm ci --prefer-offline --no-audit
+# Note: Utilisez npm ci si vous avez un package-lock.json pour de meilleures performances
+RUN npm install --no-audit
 
 # Copie du code source
 COPY . .

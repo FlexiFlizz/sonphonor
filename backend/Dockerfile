@@ -17,7 +17,8 @@ COPY package*.json ./
 COPY prisma ./prisma/
 
 # Installation de toutes les dépendances (dev + prod)
-RUN npm ci
+# Note: Utilisez npm ci si vous avez un package-lock.json pour de meilleures performances
+RUN npm install
 
 # Génération du client Prisma
 RUN npx prisma generate
